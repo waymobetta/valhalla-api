@@ -1,0 +1,26 @@
+outline
+
+subdomain: endorse.waymobetta.com
+
+endpoints:
+- GET /endorsements
+- GET /endorsements/{walletAddress}
+- POST /endorse/{walletAddress}
+
+todo:
+- create ERC-721 contract
+	properties:
+		1. burnable
+		2. mintable
+
+website functionality:
+- list wallets that have received endorsements (with linkedin profile pictures)
+- total number of endorsements given (tokens minted)
+
+resources:
+- etherscan
+- rinkeby/mainnet ethereum
+-	linkedin
+
+scripts:
+- endorse someone [by address]; send ERC721

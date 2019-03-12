@@ -1,0 +1,202 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  Godkjent:
+    description: Vis godjkent (default view)
+    example:
+      adresse: Cumque eius at et consequuntur maiores.
+      navn: Consequuntur voluptas adipisci alias provident.
+    properties:
+      adresse:
+        description: Ethereum adresse
+        example: Cumque eius at et consequuntur maiores.
+        type: string
+      navn:
+        description: Navn på godkjent
+        example: Consequuntur voluptas adipisci alias provident.
+        type: string
+    required:
+    - navn
+    - adresse
+    title: 'Mediatype identifier: application/vnd.godkjent+json; view=default'
+    type: object
+  GodkjentCollection:
+    description: GodkjentCollection is the media type for an array of Godkjent (default
+      view)
+    example:
+    - adresse: Cumque eius at et consequuntur maiores.
+      navn: Consequuntur voluptas adipisci alias provident.
+    - adresse: Cumque eius at et consequuntur maiores.
+      navn: Consequuntur voluptas adipisci alias provident.
+    - adresse: Cumque eius at et consequuntur maiores.
+      navn: Consequuntur voluptas adipisci alias provident.
+    items:
+      $ref: '#/definitions/Godkjent'
+    title: 'Mediatype identifier: application/vnd.godkjent+json; type=collection;
+      view=default'
+    type: array
+  Godkjentliste:
+    description: Vis godkjent liste (default view)
+    example:
+      godkjentListe:
+      - adresse: Cumque eius at et consequuntur maiores.
+        navn: Consequuntur voluptas adipisci alias provident.
+      - adresse: Cumque eius at et consequuntur maiores.
+        navn: Consequuntur voluptas adipisci alias provident.
+    properties:
+      godkjentListe:
+        $ref: '#/definitions/GodkjentCollection'
+    required:
+    - godkjentListe
+    title: 'Mediatype identifier: application/vnd.godkjentliste+json; view=default'
+    type: object
+  Helse:
+    description: Helse (default view)
+    example:
+      status: Eum non mollitia labore sapiente sint facilis.
+    properties:
+      status:
+        description: Status
+        example: Eum non mollitia labore sapiente sint facilis.
+        type: string
+    required:
+    - status
+    title: 'Mediatype identifier: application/vnd.helse+json; view=default'
+    type: object
+  LeggeTilGodkjentNyttelast:
+    description: Legge til godkjent på listen
+    example:
+      adresse: Cupiditate voluptatem fugit neque.
+      navn: Officiis amet reiciendis assumenda in.
+    properties:
+      adresse:
+        description: Ethereum adresse
+        example: Cupiditate voluptatem fugit neque.
+        type: string
+      navn:
+        description: Navn på godkjent
+        example: Officiis amet reiciendis assumenda in.
+        type: string
+    required:
+    - navn
+    - adresse
+    title: LeggeTilGodkjentNyttelast
+    type: object
+  Standard_error:
+    description: A standard error response (default view)
+    example:
+      code: 400
+      message: Bad Request
+    properties:
+      code:
+        description: A code that describes the error
+        example: 400
+        format: int64
+        type: integer
+      message:
+        description: A message that describes the error
+        example: Bad Request
+        type: string
+    required:
+    - code
+    - message
+    title: 'Mediatype identifier: application/standard_error+json; view=default'
+    type: object
+host: localhost:5000
+info:
+  description: Valhalla API
+  title: Valhalla API
+  version: ""
+paths:
+  /v1/godkjent:
+    get:
+      description: vis godkjent
+      operationId: godkjent#vis
+      produces:
+      - application/standard_error+json
+      - application/vnd.godkjentliste+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Godkjentliste'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Standard_error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Standard_error'
+      schemes:
+      - http
+      summary: vis godkjent
+      tags:
+      - godkjent
+    post:
+      description: Legge til en godjkent
+      operationId: godkjent#leggeTil
+      parameters:
+      - description: Legge til godkjent på listen
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/LeggeTilGodkjentNyttelast'
+      produces:
+      - application/standard_error+json
+      - application/vnd.godkjent+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Godkjent'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Standard_error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Standard_error'
+      schemes:
+      - http
+      summary: leggeTil godkjent
+      tags:
+      - godkjent
+  /v1/helse:
+    get:
+      description: OK hvis sunn
+      operationId: helse#vis
+      produces:
+      - application/standard_error+json
+      - application/vnd.helse+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Helse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Standard_error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Standard_error'
+      schemes:
+      - http
+      summary: vis helse
+      tags:
+      - helse
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+schemes:
+- http
+swagger: "2.0"

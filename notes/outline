@@ -1,11 +1,16 @@
 outline
 
-subdomain: endorse.waymobetta.com
+subdomain: valhalla.waymobetta.com
+
+* The eternal hall of legendary people whom I am an advocate for
+
+description:
+- an eternal list that is owned and managed by a person within which one can announce/denounce their public advocation for other users
 
 endpoints:
-- GET /endorsements
-- GET /endorsements/{walletAddress}
-- POST /endorse/{walletAddress}
+- GET /v1/godkjent
+- GET /v1/godkjent/{adresse}
+- POST /v1/godkjent
 
 todo:
 - create ERC-721 contract

@@ -31,8 +31,6 @@ definitions:
       navn: Consequuntur voluptas adipisci alias provident.
     - adresse: Cumque eius at et consequuntur maiores.
       navn: Consequuntur voluptas adipisci alias provident.
-    - adresse: Cumque eius at et consequuntur maiores.
-      navn: Consequuntur voluptas adipisci alias provident.
     items:
       $ref: '#/definitions/Godkjent'
     title: 'Mediatype identifier: application/vnd.godkjent+json; type=collection;
@@ -42,6 +40,8 @@ definitions:
     description: Vis godkjent liste (default view)
     example:
       godkjentListe:
+      - adresse: Cumque eius at et consequuntur maiores.
+        navn: Consequuntur voluptas adipisci alias provident.
       - adresse: Cumque eius at et consequuntur maiores.
         navn: Consequuntur voluptas adipisci alias provident.
       - adresse: Cumque eius at et consequuntur maiores.
@@ -71,6 +71,7 @@ definitions:
     example:
       adresse: Cupiditate voluptatem fugit neque.
       navn: Officiis amet reiciendis assumenda in.
+      secret: Voluptate repellat perferendis tempore veritatis et nihil.
     properties:
       adresse:
         description: Ethereum adresse
@@ -80,9 +81,14 @@ definitions:
         description: Navn på godkjent
         example: Officiis amet reiciendis assumenda in.
         type: string
+      secret:
+        description: Secret phrase
+        example: Voluptate repellat perferendis tempore veritatis et nihil.
+        type: string
     required:
     - navn
     - adresse
+    - secret
     title: LeggeTilGodkjentNyttelast
     type: object
   Standard_error:

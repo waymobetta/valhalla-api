@@ -2,14 +2,19 @@ package db
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 
+	homedir "github.com/mitchellh/go-homedir"
 	"github.com/waymobetta/valhalla-api/app"
 )
 
-func Vis() (app.GodkjentCollection, *app.StandardError) {
-	fil := "./db/db.json"
+var (
+	home, _ = homedir.Dir()
+	fil     = fmt.Sprintf("%s/go/src/github.com/waymobetta/valhalla-api/db/%s", home, "db.json")
+)
 
+func Vis() (app.GodkjentCollection, *app.StandardError) {
 	var liste []*app.Godkjent
 	var g app.GodkjentCollection
 
@@ -39,9 +44,6 @@ func Vis() (app.GodkjentCollection, *app.StandardError) {
 }
 
 func LeggeTil(navn, adresse string) *app.StandardError {
-
-	fil := "./db/db.json"
-
 	// nye Godkjent struct
 	gk := &app.Godkjent{
 		Navn:    navn,

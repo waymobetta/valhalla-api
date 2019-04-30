@@ -10,8 +10,10 @@ var LeggeTilGodkjentNyttelast = Type("LeggeTilGodkjentNyttelast", func() {
 	Description("Legge til godkjent på listen")
 	Attribute("navn", String, "Navn på godkjent")
 	Attribute("adresse", String, "Ethereum adresse")
+	Attribute("secret", String, "Secret phrase")
 	Required(
 		"navn",
 		"adresse",
+		"secret",
 	)
 })

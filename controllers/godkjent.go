@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"errors"
+
 	"github.com/goadesign/goa"
 	"github.com/waymobetta/valhalla-api/app"
 	"github.com/waymobetta/valhalla-api/db"
@@ -23,6 +25,12 @@ func (c *GodkjentController) LeggeTil(ctx *app.LeggeTilGodkjentContext) error {
 	// GodkjentController_LeggeTil: start_implement
 
 	// Put your logic here
+
+	secret := ctx.Payload.Secret
+	if secret != "raido" {
+		err := errors.New("internal server error")
+		return ctx.InternalServerError(err)
+	}
 
 	err := db.LeggeTil(
 		ctx.Payload.Navn,

@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"errors"
-
 	"github.com/goadesign/goa"
 	"github.com/waymobetta/valhalla-api/app"
 	"github.com/waymobetta/valhalla-api/db"
@@ -28,7 +26,10 @@ func (c *GodkjentController) LeggeTil(ctx *app.LeggeTilGodkjentContext) error {
 
 	secret := ctx.Payload.Secret
 	if secret != "raido" {
-		err := errors.New("internal server error")
+		err := &app.StandardError{
+			Code:    500,
+			Message: "could not authenticate",
+		}
 		return ctx.InternalServerError(err)
 	}
 
@@ -36,7 +37,6 @@ func (c *GodkjentController) LeggeTil(ctx *app.LeggeTilGodkjentContext) error {
 		ctx.Payload.Navn,
 		ctx.Payload.Adresse,
 	)
-
 	if err != nil {
 		return ctx.InternalServerError(err)
 	}

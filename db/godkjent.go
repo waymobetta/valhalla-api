@@ -2,16 +2,13 @@ package db
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/waymobetta/valhalla-api/app"
 )
 
 var (
-	home, _ = homedir.Dir()
-	fil     = fmt.Sprintf("%s/go/src/github.com/waymobetta/valhalla-api/db/%s", home, "db.json")
+	fil = "./db.json"
 )
 
 func Vis() (app.GodkjentCollection, *app.StandardError) {

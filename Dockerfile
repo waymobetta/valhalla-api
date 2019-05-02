@@ -9,6 +9,7 @@ FROM scratch
 
 WORKDIR /
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /go/src/github.com/waymobetta/valhalla-api/cmd/valhalla/db.json .
 COPY --from=build /go/src/github.com/waymobetta/valhalla-api/valhalla-api .
 
 # expose default port

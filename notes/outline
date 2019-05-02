@@ -29,3 +29,6 @@ resources:
 
 scripts:
 - endorse someone [by address]; send ERC721
+
+add member:
+curl -X POST "https://valhalla-api.waymobetta.com/v1/godkjent" -H "Authorization: Bearer null" -d "{ \"adresse\": \"\", \"navn\": \"\", \"secret\": \"\"}"
